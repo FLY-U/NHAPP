@@ -1,0 +1,7 @@
+<resources>
+    <dimen name="activity_horizontal_margin">20dp</dimen>
+    <dimen name="activity_vertical_margin">20dp</dimen>
+    <dimen name="dimen_100px">44.44dp</dimen>
+    <dimen name="dimen_120px">53.28dp</dimen>
+    <dimen name="dimen_30px">13.33dp</dimen>
+</resources>
