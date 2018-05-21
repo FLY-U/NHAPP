@@ -49,14 +49,14 @@ public class ChangePWDActivity extends AppCompatActivity {
                 new Thread(){
                     @Override
                     public void run(){
-                        invoke.POST_K3CloudURL = "http://222.222.44.242:6697/K3Cloud/";//金蝶K3Cloudwebapi接口访问地址
-                        String dbId = "5a41bbac3d52f7";//账套ID
+                        invoke.POST_K3CloudURL = "http://localhost/K3Cloud/";//金蝶K3Cloudwebapi接口访问地址
+                        String dbId = "1";//账套ID
                         String uid = "zhangh";//登录名
-                        String pwd = "123456";//密码
+                        String pwd = "";//密码
                         int lang = 2052;//语言代码，2052为中文
                         try{
                             if (InvokeHelper.Login(dbId, uid, pwd, lang)) {//验证登录
-                                String ret = InvokeHelper.changepwd("","{\"phoneNumber\": \"15226571320\",\"passWord\": \"1\"}");
+                                String ret = InvokeHelper.changepwd("","{\"phoneNumber\": \"136......\",\"passWord\": \"1\"}");
                                 ArrayList<JsonRootBean> arrayList = getEntityFromJson(ret,JsonRootBean.class);
                                 int result=0;
                                 for (int i=0;i<arrayList.size();i++) {
