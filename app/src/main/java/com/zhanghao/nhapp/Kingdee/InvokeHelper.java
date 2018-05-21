@@ -14,7 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class InvokeHelper {
-    public static String POST_K3CloudURL = "http://222.222.44.242:6698/K3Cloud/";
+    public static String POST_K3CloudURL = "http://localhost/K3Cloud/";
     private static String CookieVal = null;
     private static Map map = new HashMap();
     static {
