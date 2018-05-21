@@ -1,4 +1,4 @@
-package com.zhanghao.nhapp.User;
+package com.zhanghao.nhapp.activity.User;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -10,12 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.zhanghao.nhapp.Entity.MesObject;
 import com.zhanghao.nhapp.Entity.User.JsonRootBean;
 import com.zhanghao.nhapp.Kingdee.InvokeHelper;
-import com.zhanghao.nhapp.MainActivity;
 import com.zhanghao.nhapp.R;
 
 import java.util.ArrayList;

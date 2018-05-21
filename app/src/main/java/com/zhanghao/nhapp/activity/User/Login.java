@@ -1,4 +1,4 @@
-package com.zhanghao.nhapp.User;
+package com.zhanghao.nhapp.activity.User;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -10,14 +10,12 @@ import android.os.Handler;
 import android.text.TextPaint;
 import android.view.Menu;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.liyi.sutils.utils.QRCodeUtil;
 import com.zhanghao.nhapp.Entity.User.JsonRootBean;
 import com.zhanghao.nhapp.Entity.MesObject;
 import com.zhanghao.nhapp.Kingdee.InvokeHelper;
