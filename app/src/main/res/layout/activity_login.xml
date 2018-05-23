@@ -11,13 +11,11 @@
     android:gravity="center">
 
 
-    <TextView
-        android:id="@+id/topname"
-        android:layout_width="fill_parent"
+    <ImageView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="南华集团"
-        android:textColor="@android:color/black"
-        android:gravity="center"/>
+        android:background="@mipmap/ic_launcher"
+        />
 
     <ImageView
         android:id="@+id/loginImage"
@@ -53,23 +51,31 @@
         android:gravity="center_vertical"
         android:background="@drawable/txtborder"
         android:paddingRight="2dp"/>
-    <Button
-        android:id="@+id/loginbtn"
-        android:layout_width="150dip"
-        android:layout_height="45dip"
-        android:layout_marginTop="20dip"
-        android:text="登录"
-        android:gravity="center"
-        android:background="@drawable/bg_border1"
-        />
-    <Button
-        android:id="@+id/changepwdbtn"
-        android:layout_width="150dip"
-        android:layout_height="45dip"
-        android:layout_marginTop="20dip"
-        android:text="修改密码"
-        android:gravity="center"
-        android:background="@drawable/bg_border1"
-        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <Button
+            android:id="@+id/loginbtn"
+            android:layout_width="120dip"
+            android:layout_height="45dip"
+            android:layout_marginTop="20dip"
+            android:text="登录"
+            android:gravity="center"
+            android:background="@drawable/bg_border1"
+            />
+        <Button
+            android:id="@+id/changepwdbtn"
+            android:layout_toRightOf="@id/loginbtn"
+            android:layout_width="120dip"
+            android:layout_height="45dip"
+            android:layout_marginTop="20dip"
+            android:layout_marginLeft="30dp"
+            android:text="修改密码"
+            android:gravity="center"
+            android:background="@drawable/bg_border1"
+            />
+    </RelativeLayout>
+
 
 </LinearLayout>

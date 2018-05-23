@@ -46,6 +46,7 @@ tools:showIn="@layout/activity_change_pwd">
         />
     <Button
         android:layout_width="300dp"
+        android:id="@+id/Confirm"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"

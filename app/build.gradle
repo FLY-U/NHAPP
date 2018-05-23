@@ -28,5 +28,9 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.ashokvarma.android:bottom-navigation-bar:2.0.4'
     implementation 'com.liyi.sutils:sutils:2.0.6'
-    implementation 'com.github.shenyuanqing.zxing:zxing-simplify:1.0.5'
+    configurations {
+        all*.exclude group: 'com.android.support', module: 'support-v13'
+    }
+    implementation 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 }

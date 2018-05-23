@@ -33,5 +33,9 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:src">@drawable/small_divider</item>
     </style>
+    <style name="PopupAnimation">
+        <item name="android:windowExitAnimation">@anim/popup_animation_02</item>
+        <item name="android:windowEnterAnimation">@anim/popup_animation</item>
+    </style>
 
 </resources>

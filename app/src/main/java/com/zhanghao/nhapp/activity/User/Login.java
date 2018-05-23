@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 import static com.zhanghao.nhapp.Tools.Json.JsonHelper.getEntityFromJson;
 
-public class Login extends AppCompatActivity {
+public class Login extends AppCompatActivity implements View.OnClickListener{
     private ImageView loginImage;
     private TextView topText;
     private TextPaint tp;
@@ -36,88 +36,41 @@ public class Login extends AppCompatActivity {
     private EditText password;
     private Drawable mIconPerson;
     private Drawable mIconLock;
-    InvokeHelper invoke = new InvokeHelper();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ActionBar actionBar=getSupportActionBar();//去掉顶部标题栏方法
         actionBar.hide();//去掉顶部标题栏方法
-        username = (EditText)findViewById(R.id.username);
-        password=(EditText)findViewById(R.id.password);
-        changepwdbtn=(Button)findViewById(R.id.changepwdbtn);
-        loginbtn = (Button)findViewById(R.id.loginbtn);
-        final Handler handler=new Handler(){
-            public void handleMessage(Message msg) {
-                MesObject obj =(MesObject) msg.obj;
-                String mg = obj.Message;
-                Toast.makeText(Login.this,mg, Toast.LENGTH_LONG).show();
-            };
-        };
-        changepwdbtn.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                EditText dt;
-                dt = (EditText) findViewById(R.id.username);
-                final String phone = dt.getText().toString();
-                Intent intent = new Intent(Login.this,ChangePWDActivity.class);
-                intent.putExtra("phoneNumber",phone);
-                startActivity(intent);
-            }
-        });
-        loginbtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                new Thread(){
-                    @Override
-                    public void run(){
-                        super.run();
-                        invoke.POST_K3CloudURL = "http://localhost/K3Cloud/";//金蝶K3Cloudwebapi接口访问地址
-                        String dbId = "5a41bbac3d52f7";//账套ID
-                        String uid = "zhangh";//登录名
-                        String pwd = "";//密码
-                        int lang = 2052;//语言代码，2052为中文
-                        try{
-                            if (InvokeHelper.Login(dbId, uid, pwd, lang)) {//验证登录
-                                String ret = InvokeHelper.login("","{\"phoneNumber\": \"136........\",\"passWord\": \"1\"}");
-                                ArrayList<JsonRootBean> arrayList = getEntityFromJson(ret,JsonRootBean.class);
-                                int result=0;
-                                for (int i=0;i<arrayList.size();i++) {
-                                    result = arrayList.get(i).getResult();
-                                }
-                                if(result==2){
-                                    Message msg=new Message();
-                                    MesObject obj = new MesObject();
-                                    obj.Message = "登陆成功";
-                                    msg.obj = obj;
-                                    handler.sendMessage(msg);
-                                    Intent intent = new Intent();
-                                    intent.setClass(Login.this, MainActivity.class);
-                                    startActivity(intent);
-                                }
-                            }else {
-                                Message msg=new Message();
-                                MesObject obj = new MesObject();
-                                obj.Message = "登陆失败";
-                                msg.obj = obj;
-                                handler.sendMessage(msg);
-                            }
-                        }catch (Exception e){
-                            Message msg=new Message();
-                            MesObject obj = new MesObject();
-                            obj.Message = "登陆异常";
-                            msg.obj = obj;
-                            handler.sendMessage(msg);
-                        }
-                    }
-                }.start();
-            }
-        });
+        loginbtn = findViewById(R.id.loginbtn);
+        initClickEvent(); //初始化点击事件
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.login,menu);
         return true;
     }
+    public void initClickEvent(){
+        loginbtn.setOnClickListener(this);
+    }
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.loginbtn:
+                Intent intent = new Intent();
+                intent.setClass(Login.this, MainActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.changepwdbtn:
 
+                EditText dt;
+                dt = (EditText) findViewById(R.id.username);
+                final String phone = dt.getText().toString();
+                intent = new Intent(Login.this,ChangePWDActivity.class);
+                intent.putExtra("phoneNumber",phone);
+                startActivity(intent);
+                break;
+        }
+    }
 }
 

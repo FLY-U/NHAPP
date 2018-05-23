@@ -1,127 +1,109 @@
 package com.zhanghao.nhapp;
 
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.RadioButton;
-import android.widget.Toolbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-import com.zhanghao.nhapp.Fragment.CategoryFragment;
-import com.zhanghao.nhapp.Fragment.CollectFragment;
-import com.zhanghao.nhapp.Fragment.HomeFragment;
-import com.zhanghao.nhapp.Fragment.SettingFragment;
-import com.zhanghao.nhapp.utils.ConstantValues;
-import com.zhanghao.nhapp.view.MyTabWidget;
+import com.zhanghao.nhapp.Base.BaseActivity;
+import com.zhanghao.nhapp.Fragment.FirstFragment;
+import com.zhanghao.nhapp.adapter.QFragmentPagerAdapter;
+import com.zhanghao.nhapp.widget.NoScrollViewPager;
 
+import java.util.ArrayList;
 
-public class MainActivity extends FragmentActivity implements MyTabWidget.OnTabSelectedListener {
-    private static final String TAG = "MainActivity";
-    private MyTabWidget mTabWidget;
-    private HomeFragment mHomeFragment;
-    private CategoryFragment mCategoryFragment;
-    private CollectFragment mCollectFragment;
-    private SettingFragment mSettingFragment;
-    private int mIndex = ConstantValues.HOME_FRAGMENT_INDEX;
-    private FragmentManager mFragmentManager;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class MainActivity extends BaseActivity implements View.OnClickListener{
+
+    @BindView(R.id.tv_title_main)
+    TextView tvTitleMain;
+    @BindView(R.id.activity_address)
+    RelativeLayout activityAddress;
+    @BindView(R.id.v_main)
+    NoScrollViewPager vMain;
+    @BindView(R.id.imageView)
+    ImageView imageView;
+    @BindView(R.id.ll_tab_1)
+    LinearLayout llTab1;
+    @BindView(R.id.ll_tab_2)
+    LinearLayout llTab2;
+    @BindView(R.id.ll_tab_3)
+    LinearLayout llTab3;
+    @BindView(R.id.imgview)
+    ImageView imgview;
+    @BindView(R.id.ag_msgcount)
+    TextView agMsgcount;
+    @BindView(R.id.tv_mg)
+    TextView tvMg;
+    @BindView(R.id.ll_tab_4)
+    LinearLayout llTab4;
+    @BindView(R.id.ll_main)
+    LinearLayout llMain;
+    private ArrayList<Fragment> fragmentArray;
+    private QFragmentPagerAdapter fragmentAdapter;
+    private LinearLayout lastTab;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        init();
-        initEvents();
+        ButterKnife.bind(this);
+        initClickEvent();
+        initFragment(); //初始化Fragment
     }
-    private void init() {
-        mFragmentManager = getSupportFragmentManager();
-        mTabWidget = (MyTabWidget) findViewById(R.id.tab_widget);
-    }
+    private void initFragment(){
+        fragmentArray = new ArrayList<>();
 
-    private void initEvents() {
-        mTabWidget.setOnTabSelectedListener(this);
-    }
+        fragmentArray.add(new FirstFragment());
+        fragmentAdapter = new QFragmentPagerAdapter(getSupportFragmentManager(), fragmentArray);
+        vMain.setAdapter(fragmentAdapter);
 
+
+        lastTab = llTab1;
+        changePage(0, llTab1); //设置默认选中第一个
+        tvTitleMain.setText("第一页");
+    }
+    private void changePage(int item, LinearLayout currentTab) {
+        if (lastTab != null) {
+            lastTab.setSelected(false);
+            currentTab.setSelected(true);
+            vMain.setCurrentItem(item, false);
+            lastTab = currentTab;
+        }
+
+    }
+    private void initClickEvent() {
+        llTab1.setOnClickListener(this);
+        llTab2.setOnClickListener(this);
+        llTab3.setOnClickListener(this);
+        llTab4.setOnClickListener(this);
+    }
     @Override
-    protected void onResume() {
-        super.onResume();
-        onTabSelected(mIndex);
-        mTabWidget.setTabsDisplay(this, mIndex);
-        mTabWidget.setIndicateDisplay(this, 3, true);
-    }
-
-    @Override
-    public void onTabSelected(int index) {
-        FragmentTransaction transaction = mFragmentManager.beginTransaction();
-        hideFragments(transaction);
-        switch (index) {
-            case ConstantValues.HOME_FRAGMENT_INDEX:
-                if (null == mHomeFragment) {
-                    mHomeFragment = new HomeFragment();
-                    transaction.add(R.id.center_layout, mHomeFragment);
-                } else {
-                    transaction.show(mHomeFragment);
-                }
+    public void onClick(View view){
+        switch (view.getId()) {
+            case R.id.ll_tab_1:
+                changePage(0, llTab1);
+                tvTitleMain.setText("第一页");
                 break;
-            case ConstantValues.CATEGORY_FRAGMENT_INDEX:
-                if (null == mCategoryFragment) {
-                    mCategoryFragment = new CategoryFragment();
-                    transaction.add(R.id.center_layout, mCategoryFragment);
-                } else {
-                    transaction.show(mCategoryFragment);
-                }
+            case R.id.ll_tab_2:
+                changePage(1, llTab2);
+                tvTitleMain.setText("第二页");
                 break;
-            case ConstantValues.COLLECT_FRAGMENT_INDEX:
-                if (null == mCollectFragment) {
-                    mCollectFragment = new CollectFragment();
-                    transaction.add(R.id.center_layout, mCollectFragment);
-                } else {
-                    transaction.show(mCollectFragment);
-                }
+            case R.id.ll_tab_3:
+                changePage(2, llTab3);
+                tvTitleMain.setText("第三页");
                 break;
-            case ConstantValues.SETTING_FRAGMENT_INDEX:
-                if (null == mSettingFragment) {
-                    mSettingFragment = new SettingFragment();
-                    transaction.add(R.id.center_layout, mSettingFragment);
-                } else {
-                    transaction.show(mSettingFragment);
-                }
+            case R.id.ll_tab_4:
+                changePage(3, llTab4);
+                tvTitleMain.setText("第四页");
                 break;
-
-            default:
-                break;
-        }
-        mIndex = index;
-        transaction.commitAllowingStateLoss();
-    }
-
-    private void hideFragments(FragmentTransaction transaction) {
-        if (null != mHomeFragment) {
-            transaction.hide(mHomeFragment);
-        }
-        if (null != mCategoryFragment) {
-            transaction.hide(mCategoryFragment);
-        }
-        if (null != mCollectFragment) {
-            transaction.hide(mCollectFragment);
-        }
-        if (null != mSettingFragment) {
-            transaction.hide(mSettingFragment);
         }
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        // 自己记录fragment的位置,防止activity被系统回收时，fragment错乱的问题
-        // super.onSaveInstanceState(outState);
-        super.onSaveInstanceState(outState);
-        outState.putInt("index", mIndex);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        // super.onRestoreInstanceState(savedInstanceState);
-        mIndex = savedInstanceState.getInt("index");
-    }
 }
