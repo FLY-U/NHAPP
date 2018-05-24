@@ -53,6 +53,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //测试分支
         ButterKnife.bind(this);
         initClickEvent();
         initFragment(); //初始化Fragment
