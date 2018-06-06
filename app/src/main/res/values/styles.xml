@@ -37,5 +37,8 @@
         <item name="android:windowExitAnimation">@anim/popup_animation_02</item>
         <item name="android:windowEnterAnimation">@anim/popup_animation</item>
     </style>
+    <style name="AppTheme.Blue" parent="Theme.AppCompat.Dialog">
+        <item name="colorAccent">@color/theme_blue</item>
+    </style>
 
 </resources>

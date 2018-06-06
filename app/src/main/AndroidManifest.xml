@@ -21,7 +21,8 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".activity.User.ChangePWDActivity" />
-        <activity android:name=".activity.User.ListView.SwipeRefresh"></activity>
+        <activity android:name=".activity.User.ListView.SwipeRefresh" />
+        <activity android:name=".activity.contactlist.ContactListActivity"></activity>
     </application>
 
 </manifest>

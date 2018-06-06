@@ -18,4 +18,6 @@
 
     <!-- 分割线 -->
     <color name="fuxk_base_divide_line_color">#dcdcdc</color>
+    <color name="normal" >#eae8e8</color>
+    <color name="theme_blue">#008df9</color>
 </resources>

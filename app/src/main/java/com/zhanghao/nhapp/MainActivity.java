@@ -1,39 +1,26 @@
 package com.zhanghao.nhapp;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.zhanghao.nhapp.Base.BaseActivity;
-import com.zhanghao.nhapp.Fragment.FirstFragment;
-import com.zhanghao.nhapp.Fragment.SecondFragment;
+import com.zhanghao.nhapp.activity.contactlist.ContactListActivity;
 import com.zhanghao.nhapp.activity.User.ListView.SwipeRefresh;
-import com.zhanghao.nhapp.adapter.QFragmentPagerAdapter;
 import com.zhanghao.nhapp.utils.MoveUtils;
-import com.zhanghao.nhapp.widget.NoScrollViewPager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity{
 
     //定义图标数组
     private int[] imageRes = {
             R.drawable.refresh,
-            R.drawable.ic_launcher,
+            R.drawable.contacts,
             R.drawable.ic_launcher,
             R.drawable.ic_launcher,
             R.drawable.ic_launcher,
@@ -52,7 +39,7 @@ public class MainActivity extends AppCompatActivity{
     //定义图标下方的名称数组
     private String[] name = {
             "上拉加载下拉刷新",
-            "订单查询",
+            "联系人列表",
             "转账",
             "手机充值",
             "信用卡还款",
@@ -100,6 +87,8 @@ public class MainActivity extends AppCompatActivity{
                 Toast.makeText(MainActivity.this,name[position],Toast.LENGTH_LONG).show();
                 if(name[position]=="上拉加载下拉刷新"){
                     MoveUtils.go(MainActivity.this, SwipeRefresh.class);
+                }else if(name[position]=="联系人列表"){
+                    MoveUtils.go(MainActivity.this, ContactListActivity.class);
                 }
             }
         });
