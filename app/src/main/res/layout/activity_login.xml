@@ -16,13 +16,11 @@
         android:layout_height="wrap_content"
         android:background="@mipmap/ic_launcher"
         />
-
     <ImageView
         android:id="@+id/loginImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dip" />
-
     <EditText
         android:id="@+id/username"
         android:layout_width="fill_parent"

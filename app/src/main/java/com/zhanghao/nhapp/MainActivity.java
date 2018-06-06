@@ -3,108 +3,105 @@ package com.zhanghao.nhapp;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zhanghao.nhapp.Base.BaseActivity;
 import com.zhanghao.nhapp.Fragment.FirstFragment;
+import com.zhanghao.nhapp.Fragment.SecondFragment;
+import com.zhanghao.nhapp.activity.User.ListView.SwipeRefresh;
 import com.zhanghao.nhapp.adapter.QFragmentPagerAdapter;
+import com.zhanghao.nhapp.utils.MoveUtils;
 import com.zhanghao.nhapp.widget.NoScrollViewPager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity{
 
-    @BindView(R.id.tv_title_main)
-    TextView tvTitleMain;
-    @BindView(R.id.activity_address)
-    RelativeLayout activityAddress;
-    @BindView(R.id.v_main)
-    NoScrollViewPager vMain;
-    @BindView(R.id.imageView)
-    ImageView imageView;
-    @BindView(R.id.ll_tab_1)
-    LinearLayout llTab1;
-    @BindView(R.id.ll_tab_2)
-    LinearLayout llTab2;
-    @BindView(R.id.ll_tab_3)
-    LinearLayout llTab3;
-    @BindView(R.id.imgview)
-    ImageView imgview;
-    @BindView(R.id.ag_msgcount)
-    TextView agMsgcount;
-    @BindView(R.id.tv_mg)
-    TextView tvMg;
-    @BindView(R.id.ll_tab_4)
-    LinearLayout llTab4;
-    @BindView(R.id.ll_main)
-    LinearLayout llMain;
-    private ArrayList<Fragment> fragmentArray;
-    private QFragmentPagerAdapter fragmentAdapter;
-    private LinearLayout lastTab;
+    //定义图标数组
+    private int[] imageRes = {
+            R.drawable.refresh,
+            R.drawable.ic_launcher,
+            R.drawable.ic_launcher,
+            R.drawable.ic_launcher,
+            R.drawable.ic_launcher,
+            R.drawable.ic_launcher,
+            R.drawable.ic_launcher,
+            R.drawable.ic_launcher,
+            R.drawable.ic_launcher,
+            R.drawable.ic_launcher,
+            R.drawable.ic_launcher,
+            R.drawable.ic_launcher,
+            R.drawable.ic_launcher,
+            R.drawable.ic_launcher
 
+            };
+
+    //定义图标下方的名称数组
+    private String[] name = {
+            "上拉加载下拉刷新",
+            "订单查询",
+            "转账",
+            "手机充值",
+            "信用卡还款",
+            "水电煤",
+            "违章代缴",
+            "快递查询",
+            "更多",
+            "信用卡还款",
+            "水电煤",
+            "违章代缴",
+            "快递查询",
+            "更多"
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //测试分支
-        ButterKnife.bind(this);
-        initClickEvent();
-        initFragment(); //初始化Fragment
-    }
-    private void initFragment(){
-        fragmentArray = new ArrayList<>();
+        GridView gridview = (GridView) findViewById(R.id.gridview);
+        int length = imageRes.length;
 
-        fragmentArray.add(new FirstFragment());
-        fragmentAdapter = new QFragmentPagerAdapter(getSupportFragmentManager(), fragmentArray);
-        vMain.setAdapter(fragmentAdapter);
-
-
-        lastTab = llTab1;
-        changePage(0, llTab1); //设置默认选中第一个
-        tvTitleMain.setText("第一页");
-    }
-    private void changePage(int item, LinearLayout currentTab) {
-        if (lastTab != null) {
-            lastTab.setSelected(false);
-            currentTab.setSelected(true);
-            vMain.setCurrentItem(item, false);
-            lastTab = currentTab;
+        //生成动态数组，并且转入数据
+        ArrayList<HashMap<String, Object>> lstImageItem = new ArrayList<HashMap<String, Object>>();
+        for (int i = 0; i < length; i++) {
+            HashMap<String, Object> map = new HashMap<String, Object>();
+            map.put("ItemImage", imageRes[i]);//添加图像资源的ID
+            map.put("ItemText", name[i]);//按序号做ItemText
+            lstImageItem.add(map);
         }
+        //生成适配器的ImageItem 与动态数组的元素相对应
+        SimpleAdapter saImageItems = new SimpleAdapter(this,
+                lstImageItem,//数据来源
+                R.layout.item,//item的XML实现
 
-    }
-    private void initClickEvent() {
-        llTab1.setOnClickListener(this);
-        llTab2.setOnClickListener(this);
-        llTab3.setOnClickListener(this);
-        llTab4.setOnClickListener(this);
-    }
-    @Override
-    public void onClick(View view){
-        switch (view.getId()) {
-            case R.id.ll_tab_1:
-                changePage(0, llTab1);
-                tvTitleMain.setText("第一页");
-                break;
-            case R.id.ll_tab_2:
-                changePage(1, llTab2);
-                tvTitleMain.setText("第二页");
-                break;
-            case R.id.ll_tab_3:
-                changePage(2, llTab3);
-                tvTitleMain.setText("第三页");
-                break;
-            case R.id.ll_tab_4:
-                changePage(3, llTab4);
-                tvTitleMain.setText("第四页");
-                break;
-        }
-    }
+                //动态数组与ImageItem对应的子项
+                new String[]{"ItemImage", "ItemText"},
 
+                //ImageItem的XML文件里面的一个ImageView,两个TextView ID
+                new int[]{R.id.img_shoukuan, R.id.txt_shoukuan});
+        //添加并且显示
+        gridview.setAdapter(saImageItems);
+        //添加消息处理
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(MainActivity.this,name[position],Toast.LENGTH_LONG).show();
+                if(name[position]=="上拉加载下拉刷新"){
+                    MoveUtils.go(MainActivity.this, SwipeRefresh.class);
+                }
+            }
+        });
+    }
 }
