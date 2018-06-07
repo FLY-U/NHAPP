@@ -7,5 +7,7 @@
     <string name="custname">顾客姓名</string>
     <string name="custphone">顾客手机号</string>
     <string name="county">区县</string>
+    <string name="unable_to_open_camera">Unable to open camera, please check it and try again later.</string>
+    <string name="error">Error</string>
     <!--列表-->
 </resources>

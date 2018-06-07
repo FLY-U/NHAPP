@@ -2,8 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zhanghao.nhapp">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
 
     <application
         android:name=".common.MyApp"
@@ -25,7 +35,14 @@
         <activity android:name=".activity.User.ListView.SwipeRefresh" />
         <activity android:name=".activity.contactlist.ContactListActivity" />
         <activity android:name=".activity.Date.SelectDate2Activity" />
-        <activity android:name=".activity.FragmentActivity"></activity>
+        <activity android:name=".activity.FragmentActivity" />
+        <activity android:name=".activity.Date.DateActivity" />
+        <activity android:name=".activity.RightTopPopWindow.RightTopPopActivity" />
+        <activity android:name=".activity.progressbar.ProgressBarActivity" />
+        <activity android:name=".activity.ratingbar.ratingbar" />
+        <activity android:name=".activity.sanji.SanJiActivity" />
+        <activity android:name=".activity.erweima.ErWeiMaActivity"></activity>
+        <activity android:name=".activity.erweima.zxing.CaptureActivity"></activity>
     </application>
 
 </manifest>

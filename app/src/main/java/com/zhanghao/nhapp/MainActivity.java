@@ -8,16 +8,22 @@ import android.widget.GridView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+import com.zhanghao.nhapp.Base.BaseActivity;
 import com.zhanghao.nhapp.activity.Date.SelectDate2Activity;
 import com.zhanghao.nhapp.activity.FragmentActivity;
+import com.zhanghao.nhapp.activity.RightTopPopWindow.RightTopPopActivity;
 import com.zhanghao.nhapp.activity.contactlist.ContactListActivity;
 import com.zhanghao.nhapp.activity.User.ListView.SwipeRefresh;
+import com.zhanghao.nhapp.activity.erweima.ErWeiMaActivity;
+import com.zhanghao.nhapp.activity.progressbar.ProgressBarActivity;
+import com.zhanghao.nhapp.activity.ratingbar.ratingbar;
+import com.zhanghao.nhapp.dialog.MySimpleDialog;
 import com.zhanghao.nhapp.utils.MoveUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends BaseActivity{
 
     //定义图标数组
     private int[] imageRes = {
@@ -27,7 +33,7 @@ public class MainActivity extends AppCompatActivity{
             R.mipmap.reindeer,
             R.drawable.ic_launcher,
             R.drawable.ic_launcher,
-            R.drawable.ic_launcher,
+            R.mipmap.popup_3d,
             R.drawable.ic_launcher,
             R.drawable.ic_launcher,
             R.drawable.ic_launcher,
@@ -44,12 +50,12 @@ public class MainActivity extends AppCompatActivity{
             "联系人列表",
             "日期选择器",
             "Fragment",
-            "信用卡还款",
-            "水电煤",
-            "违章代缴",
-            "快递查询",
-            "更多",
-            "信用卡还款",
+            "加载框样例",
+            "功能框样例",
+            "仿微信右上角弹框",
+            "系统自带进度条",
+            "ratingbar",
+            "二维码",
             "水电煤",
             "违章代缴",
             "快递查询",
@@ -95,6 +101,20 @@ public class MainActivity extends AppCompatActivity{
                     MoveUtils.go(MainActivity.this, SelectDate2Activity.class);
                 }else if(name[position]=="Fragment"){
                     MoveUtils.go(MainActivity.this, FragmentActivity.class);
+                }else if(name[position]=="加载框样例"){
+                    dialogShow();
+//                dialogShow("正在获取数据...");
+                    progressDialog.setCancelable(true);
+                }else if(name[position]=="功能框样例"){
+                    new MySimpleDialog(MainActivity.this).show();
+                }else if(name[position]=="仿微信右上角弹框"){
+                    MoveUtils.go(MainActivity.this, RightTopPopActivity.class);
+                }else if(name[position]=="系统自带进度条"){
+                    MoveUtils.go(MainActivity.this, ProgressBarActivity.class);
+                }else if(name[position]=="ratingbar"){
+                    MoveUtils.go(MainActivity.this, ratingbar.class);
+                }else if(name[position]=="二维码"){
+                    MoveUtils.go(MainActivity.this, ErWeiMaActivity.class);
                 }
             }
         });
