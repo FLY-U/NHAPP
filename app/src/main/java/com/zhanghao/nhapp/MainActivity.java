@@ -8,6 +8,8 @@ import android.widget.GridView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+import com.zhanghao.nhapp.activity.Date.SelectDate2Activity;
+import com.zhanghao.nhapp.activity.FragmentActivity;
 import com.zhanghao.nhapp.activity.contactlist.ContactListActivity;
 import com.zhanghao.nhapp.activity.User.ListView.SwipeRefresh;
 import com.zhanghao.nhapp.utils.MoveUtils;
@@ -21,8 +23,8 @@ public class MainActivity extends AppCompatActivity{
     private int[] imageRes = {
             R.drawable.refresh,
             R.drawable.contacts,
-            R.drawable.ic_launcher,
-            R.drawable.ic_launcher,
+            R.drawable.calendarclock,
+            R.mipmap.reindeer,
             R.drawable.ic_launcher,
             R.drawable.ic_launcher,
             R.drawable.ic_launcher,
@@ -40,8 +42,8 @@ public class MainActivity extends AppCompatActivity{
     private String[] name = {
             "上拉加载下拉刷新",
             "联系人列表",
-            "转账",
-            "手机充值",
+            "日期选择器",
+            "Fragment",
             "信用卡还款",
             "水电煤",
             "违章代缴",
@@ -89,6 +91,10 @@ public class MainActivity extends AppCompatActivity{
                     MoveUtils.go(MainActivity.this, SwipeRefresh.class);
                 }else if(name[position]=="联系人列表"){
                     MoveUtils.go(MainActivity.this, ContactListActivity.class);
+                }else if(name[position]=="日期选择器"){
+                    MoveUtils.go(MainActivity.this, SelectDate2Activity.class);
+                }else if(name[position]=="Fragment"){
+                    MoveUtils.go(MainActivity.this, FragmentActivity.class);
                 }
             }
         });

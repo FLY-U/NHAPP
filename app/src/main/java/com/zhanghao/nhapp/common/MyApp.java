@@ -1,15 +1,26 @@
 package com.zhanghao.nhapp.common;
 
+import android.app.ActivityManager;
 import android.app.Application;
+import android.app.Notification;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Message;
 import android.os.StrictMode;
-import android.provider.SyncStateContract;
+import android.support.annotation.RequiresApi;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.util.SparseArray;
+import java.util.LinkedHashMap;
+import java.util.List;
+import android.os.Process;
 
 import com.zhanghao.nhapp.Base.BaseActivity;
 
 import org.xutils.x;
-
-import java.util.LinkedHashMap;
 
 public class MyApp extends Application {
     public static MyApp instance;
